@@ -17,7 +17,7 @@ const (
 	mediaTypeJSON = "application/json"
 )
 
-//Client host API access
+// A Client manages communication with the OneOps API.
 type Client struct {
 	client    *http.Client
 	BaseURL   *url.URL
@@ -135,21 +135,21 @@ func (c *Client) Do(ctx context.Context, req *http.Request, v interface{}) (*htt
 
 // NewClient returns a new OneOps API client. If a nil httpClient is
 // provided, a new http.Client will be used. To use API methods which require
-// authentication, provide an http.Client that will perform the authentication
+// authentication, provide an http.Client that will perform the authentication.
 func NewClient(baseURL string, httpClient *http.Client) (*Client, error) {
-	hostEndpoint, err := url.Parse(baseURL)
+	baseEndpoint, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, err
 	}
-	if !strings.HasSuffix(hostEndpoint.Path, "/") {
-		hostEndpoint.Path += "/"
+	if !strings.HasSuffix(baseEndpoint.Path, "/") {
+		baseEndpoint.Path += "/"
 	}
 
 	if httpClient == nil {
 		httpClient = &http.Client{}
 	}
 
-	c := &Client{client: httpClient, BaseURL: hostEndpoint, UserAgent: userAgent}
+	c := &Client{client: httpClient, BaseURL: baseEndpoint, UserAgent: userAgent}
 	c.common.client = c
 	c.Organizations = (*OrganizationsService)(&c.common)
 	c.Users = (*UsersService)(&c.common)
@@ -157,7 +157,8 @@ func NewClient(baseURL string, httpClient *http.Client) (*Client, error) {
 }
 
 // BasicAuthTransport authenticates all requests using
-// HTTP Basic Authentication with the provided token
+// HTTP Basic Authentication with the provided username/token
+// and optional password.
 type BasicAuthTransport struct {
 	Username string // OneOps username
 	Password string // OneOps password

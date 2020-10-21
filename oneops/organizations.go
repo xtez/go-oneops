@@ -11,7 +11,7 @@ import (
 // methods of the OneOps API.
 type OrganizationsService service
 
-// Organization represents OneOps Organization
+// Organization represents OneOps organization.
 type Organization struct {
 	ID           int       `json:"id,omitempty"`
 	Name         string    `json:"name,omitempty"`
@@ -29,7 +29,7 @@ func (o Organization) String() string {
 	return Stringify(o)
 }
 
-// Get fetches an organization by name
+// Get fetches an organization by name.
 func (s *OrganizationsService) Get(ctx context.Context, org string) (*Organization, *http.Response, error) {
 	o := fmt.Sprintf("account/organizations/%v", org)
 
@@ -47,7 +47,7 @@ func (s *OrganizationsService) Get(ctx context.Context, org string) (*Organizati
 	return organization, resp, nil
 }
 
-// ListAll lists all OneOps organizations.
+// ListAll lists all organizations accessible by authenticated user.
 func (s *OrganizationsService) ListAll(ctx context.Context) ([]*Organization, *http.Response, error) {
 	o := "account/organizations"
 
