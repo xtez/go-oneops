@@ -10,7 +10,7 @@ import (
 // methods of the OneOps API.
 type UsersService service
 
-// User represents OneOps user
+// User represents OneOps user.
 type User struct {
 	ID              int          `json:"id,omitempty"`
 	Email           string       `json:"email,omitempty"`
