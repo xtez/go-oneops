@@ -22,11 +22,11 @@ type Client struct {
 	client    *http.Client
 	BaseURL   *url.URL
 	UserAgent string
-	authToken string
 
 	common service
 
-	Users *UsersService
+	Organizations *OrganizationsService
+	Users         *UsersService
 }
 
 type service struct {
@@ -70,7 +70,6 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	if c.UserAgent != "" {
 		req.Header.Set("User-Agent", c.UserAgent)
 	}
-	req.SetBasicAuth(c.authToken, "")
 	return req, nil
 }
 
@@ -152,6 +151,7 @@ func NewClient(baseURL string, httpClient *http.Client) (*Client, error) {
 
 	c := &Client{client: httpClient, BaseURL: hostEndpoint, UserAgent: userAgent}
 	c.common.client = c
+	c.Organizations = (*OrganizationsService)(&c.common)
 	c.Users = (*UsersService)(&c.common)
 	return c, nil
 }

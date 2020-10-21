@@ -1,6 +1,11 @@
 package oneops
 
-import "time"
+import (
+	"context"
+	"fmt"
+	"net/http"
+	"time"
+)
 
 // OrganizationsService handles communication with the Organization related
 // methods of the OneOps API.
@@ -18,4 +23,42 @@ type Organization struct {
 	Services     bool      `json:"services,omitempty"`
 	Announcement string    `json:"announcement,omitempty"`
 	FullName     string    `json:"full_name,omitempty"`
+}
+
+func (o Organization) String() string {
+	return Stringify(o)
+}
+
+// Get fetches an organization by name
+func (s *OrganizationsService) Get(ctx context.Context, org string) (*Organization, *http.Response, error) {
+	o := fmt.Sprintf("account/organizations/%v", org)
+
+	req, err := s.client.NewRequest("GET", o, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	organization := new(Organization)
+	resp, err := s.client.Do(ctx, req, organization)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return organization, resp, nil
+}
+
+// ListAll lists all OneOps organizations.
+func (s *OrganizationsService) ListAll(ctx context.Context) ([]*Organization, *http.Response, error) {
+	o := "account/organizations"
+
+	req, err := s.client.NewRequest("GET", o, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+	var orgs []*Organization
+	resp, err := s.client.Do(ctx, req, &orgs)
+	if err != nil {
+		return nil, resp, err
+	}
+	return orgs, resp, nil
 }
