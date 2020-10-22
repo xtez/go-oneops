@@ -42,6 +42,30 @@ func stringifyValue(w io.Writer, val reflect.Value) {
 
 		w.Write([]byte{']'})
 		return
+	case reflect.Map:
+		if v.Type().Name() != "" {
+			w.Write([]byte(v.Type().String()))
+		}
+
+		w.Write([]byte{'{'})
+
+		var sep bool
+		keys := v.MapKeys()
+		for _, key := range keys {
+			if sep {
+				w.Write([]byte(", "))
+			} else {
+				sep = true
+			}
+
+			stringifyValue(w, key)
+			w.Write([]byte{':'})
+			value := v.MapIndex(key)
+			stringifyValue(w, value)
+		}
+
+		w.Write([]byte{'}'})
+		return
 	case reflect.Struct:
 		if v.Type().Name() != "" {
 			w.Write([]byte(v.Type().String()))
