@@ -25,8 +25,11 @@ type Client struct {
 
 	common service
 
+	Assemblies    *AssembliesService
 	Clouds        *CloudsService
+	Environments  *EnvironmentsService
 	Organizations *OrganizationsService
+	Platforms     *PlatformsService
 	Users         *UsersService
 }
 
@@ -152,8 +155,11 @@ func NewClient(baseURL string, httpClient *http.Client) (*Client, error) {
 
 	c := &Client{client: httpClient, BaseURL: baseEndpoint, UserAgent: userAgent}
 	c.common.client = c
+	c.Assemblies = (*AssembliesService)(&c.common)
 	c.Clouds = (*CloudsService)(&c.common)
+	c.Environments = (*EnvironmentsService)(&c.common)
 	c.Organizations = (*OrganizationsService)(&c.common)
+	c.Platforms = (*PlatformsService)(&c.common)
 	c.Users = (*UsersService)(&c.common)
 	return c, nil
 }
