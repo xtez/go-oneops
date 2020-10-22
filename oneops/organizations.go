@@ -60,5 +60,6 @@ func (s *OrganizationsService) ListAll(ctx context.Context) ([]*Organization, *h
 	if err != nil {
 		return nil, resp, err
 	}
+
 	return orgs, resp, nil
 }
