@@ -13,24 +13,24 @@ type EnvironmentsService service
 
 // Environment represent OneOps environment.
 type Environment struct {
-	CiID             int                                   `json:"ciId,omitempty"`
-	CiName           string                                `json:"ciName,omitempty"`
-	CiClassName      string                                `json:"ciClassName,omitempty"`
-	Impl             string                                `json:"impl,omitempty"`
-	NsPath           string                                `json:"nsPath,omitempty"`
-	CiGoid           string                                `json:"ciGoid,omitempty"`
-	Comments         string                                `json:"comments,omitempty"`
-	CiState          string                                `json:"ciState,omitempty"`
-	LastAppliedRfcID int                                   `json:"lastAppliedRfcId,omitempty"`
-	CreatedBy        string                                `json:"createdBy,omitempty"`
-	UpdatedBy        interface{}                           `json:"updatedBy,omitempty"`
-	Created          int64                                 `json:"created,omitempty"`
-	Updated          int64                                 `json:"updated,omitempty"`
-	NsID             int                                   `json:"nsId,omitempty"`
-	CiAttributes     CiAttributes                          `json:"ciAttributes,omitempty"`
-	AttrProps        AttrProps                             `json:"attrProps,omitempty"`
-	AltNs            AltNs                                 `json:"altNs,omitempty"`
-	Clouds           map[string]EnvironmentCloudAttributes `json:"clouds,omitempty"`
+	CiID             int                                `json:"ciId,omitempty"`
+	CiName           string                             `json:"ciName,omitempty"`
+	CiClassName      string                             `json:"ciClassName,omitempty"`
+	Impl             string                             `json:"impl,omitempty"`
+	NsPath           string                             `json:"nsPath,omitempty"`
+	CiGoid           string                             `json:"ciGoid,omitempty"`
+	Comments         string                             `json:"comments,omitempty"`
+	CiState          string                             `json:"ciState,omitempty"`
+	LastAppliedRfcID int                                `json:"lastAppliedRfcId,omitempty"`
+	CreatedBy        string                             `json:"createdBy,omitempty"`
+	UpdatedBy        interface{}                        `json:"updatedBy,omitempty"`
+	Created          int64                              `json:"created,omitempty"`
+	Updated          int64                              `json:"updated,omitempty"`
+	NsID             int                                `json:"nsId,omitempty"`
+	CiAttributes     CiAttributes                       `json:"ciAttributes,omitempty"`
+	AttrProps        AttrProps                          `json:"attrProps,omitempty"`
+	AltNs            AltNs                              `json:"altNs,omitempty"`
+	Clouds           map[int]EnvironmentCloudAttributes `json:"clouds,omitempty"`
 }
 
 // EnvironmentCloudAttributes represents of cloud association attributes of Environment.

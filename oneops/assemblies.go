@@ -13,23 +13,23 @@ type AssembliesService service
 
 // Assembly represent OneOps Assembly.
 type Assembly struct {
-	CiID             int          `json:"ciId"`
-	CiName           string       `json:"ciName"`
-	CiClassName      string       `json:"ciClassName"`
-	Impl             string       `json:"impl"`
-	NsPath           string       `json:"nsPath"`
-	CiGoid           string       `json:"ciGoid"`
-	Comments         string       `json:"comments"`
-	CiState          string       `json:"ciState"`
-	LastAppliedRfcID int          `json:"lastAppliedRfcId"`
-	CreatedBy        interface{}  `json:"createdBy"`
-	UpdatedBy        string       `json:"updatedBy"`
-	Created          int64        `json:"created"`
-	Updated          int64        `json:"updated"`
-	NsID             int          `json:"nsId"`
-	CiAttributes     CiAttributes `json:"ciAttributes"`
-	AttrProps        AttrProps    `json:"attrProps"`
-	AltNs            AltNs        `json:"altNs"`
+	CiID             int          `json:"ciId,omitempty"`
+	CiName           string       `json:"ciName,omitempty"`
+	CiClassName      string       `json:"ciClassName,omitempty"`
+	Impl             string       `json:"impl,omitempty"`
+	NsPath           string       `json:"nsPath,omitempty"`
+	CiGoid           string       `json:"ciGoid,omitempty"`
+	Comments         string       `json:"comments,omitempty"`
+	CiState          string       `json:"ciState,omitempty"`
+	LastAppliedRfcID int          `json:"lastAppliedRfcId,omitempty"`
+	CreatedBy        interface{}  `json:"createdBy,omitempty"`
+	UpdatedBy        string       `json:"updatedBy,omitempty"`
+	Created          int64        `json:"created,omitempty"`
+	Updated          int64        `json:"updated,omitempty"`
+	NsID             int          `json:"nsId,omitempty"`
+	CiAttributes     CiAttributes `json:"ciAttributes,omitempty"`
+	AttrProps        AttrProps    `json:"attrProps,omitempty"`
+	AltNs            AltNs        `json:"altNs,omitempty"`
 }
 
 func (a Assembly) String() string {
